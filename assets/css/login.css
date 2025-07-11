@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
+  color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #d7bfff;
+  text-shadow: 1px 1px 4px #7c5fc3;
+}
+
+form {
+  background-color: #2a2a3c;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.WelcomeText_1,
+.WelcomeText_2,
+.WelcomeText_3 {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.WelcomeText_1 {
+  font-size: 1.8rem;
+  color: #d7bfff;
+  text-shadow: 1px 1px 4px #7c5fc3;
+}
+
+.WelcomeText_2,
+.WelcomeText_3 {
+  font-size: 1rem;
+  color: #b8a5ff;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #1e1e2f;
+  color: #f8f8f8;
+  transition: 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #7c5fc3;
+  box-shadow: 0 0 5px #7c5fc3;
+}
+
+.btn {
+  padding: 10px;
+  background-color: #5f4b8b;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.btn:hover {
+  background-color: #7a62a7;
+}
+
+.errorText {
+  color: #ff6b6b;
+  background-color: #3a2a2a;
+  padding: 8px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.loggedText {
+  color: #b8ffb8;
+  background-color: #2a3a2a;
+  padding: 8px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.adivsorText {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.adivsorText + a {
+  display: block;
+  text-align: center;
+  margin-top: 5px;
+  color: #c4b2ff;
+  text-decoration: none;
+}
+
+.adivsorText + a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  margin-top: auto;
+  padding: 20px;
+  font-size: 0.9rem;
+  background-color: #161620;
+  width: 100%;
+  text-align: center;
+  color: #aaa;
+}
+
+footer a {
+  color: #c4b2ff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,133 @@
+/* General */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #1e1e2f;
+    color: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    font-size: 2rem;
+    margin: 20px 0;
+    color: #d7bfff;
+    text-shadow: 1px 1px 4px #7c5fc3;
+}
+
+/* Contenedor principal de juego */
+#mainContainer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+/* Game board */
+#divGameTable {
+    display: grid;
+    grid-template-columns: repeat(var(--n), 40px);
+    grid-template-rows: repeat(var(--n), 40px);
+    gap: 4px;
+}
+
+.divBoxGame {
+    width: 40px;
+    height: 40px;
+}
+
+.btnBox {
+    width: 100%;
+    height: 100%;
+    font-size: 1.2rem;
+    background-color: #2a2a3c;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btnBox:hover:not(:disabled) {
+    background-color: #3a3a5a;
+}
+
+.btnBox:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Highlight */
+.highlight {
+    background-color: #f3b6ff !important;
+    color: #000;
+    font-weight: bold;
+    border: 2px solid #c96eff;
+}
+
+/* Panel lateral */
+#sidePanel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    max-width: 250px;
+}
+
+#textSelectedLetter {
+    font-size: 1.2rem;
+    color: #b8a5ff;
+}
+
+#textResults {
+    width: 100%;
+}
+
+.divPlayerResults {
+    background-color: #2d2d44;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border-left: 5px solid #a278ff;
+    box-shadow: 0 0 6px rgba(162, 120, 255, 0.3);
+}
+
+/* Botones */
+button {
+    padding: 8px 16px;
+    background-color: #5f4b8b;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background-color: #7a62a7;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    padding: 20px;
+    font-size: 0.9rem;
+    background-color: #161620;
+    width: 100%;
+    text-align: center;
+    color: #aaa;
+}
+
+footer a {
+    color: #c4b2ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
