@@ -3,4 +3,4 @@
 [] Mejorar la interfaz de juego
 [x] Proteger las rutas
 [] Terminar partida, abandonar, juego terminado
-[]Iniciar el repositorio
+[x]Iniciar el repositorio

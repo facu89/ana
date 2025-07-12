@@ -1,7 +1,10 @@
 <?php
+if(isset($_GET['selectPlayers'])){
 session_start();
 session_unset();
 session_destroy();
+}
+
 session_start();
 require_once("User.class.php");
 
