@@ -1,11 +1,14 @@
 <?php
-if(isset($_GET['selectPlayers'])){
-session_start();
-session_unset();
-session_destroy();
+// Solo destruye la sesión si realmente quieres reiniciar el juego, por ejemplo, si accedes sin parámetros y es el inicio absoluto
+if (isset($_GET['reset'])) {
+    session_start();
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit;
+} else {
+    session_start();
 }
-
-session_start();
 require_once("User.class.php");
 
 
@@ -14,6 +17,14 @@ $size         = (int)($_POST['selectSize']    ?? $_GET['selectSize']    ?? 3);
 $loginPlayer  = (int)($_POST['loginPlayer']   ?? $_GET['loginPlayer']   ?? 1);
 
 $errors = [];
+
+// Si hay errores y POST, mantener los valores originales para el formulario
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($errors)) {
+    // Mantener el loginPlayer del POST
+    $loginPlayer = (int)($_POST['loginPlayer'] ?? $loginPlayer);
+    $countPlayers = (int)($_POST['selectPlayers'] ?? $countPlayers);
+    $size = (int)($_POST['selectSize'] ?? $size);
+}
 
 // Protección extra: si el primer usuario ya está logueado y se accede a login.php sin POST, redirigir según el jugador
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_SESSION['player1'])) {
@@ -65,14 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <header><p class="WelcomeText_1">Bienvenido a Ana</p></header>
   <p class="WelcomeText_2">
-    <?php if (!isset($_GET['selectPlayers'])): ?>
-    <p class="WelcomeText_2">Por favor, inicie sesión para comenzar.</p>
+    <?php if ($loginPlayer === 1): ?>
+      Por favor, inicie sesión para comenzar.
     <?php else: ?>
-    <p class="WelcomeText_2">
-        Ingrese credenciales del jugador 
-        <?= htmlspecialchars($loginPlayer) ?> de 
-        <?= htmlspecialchars($countPlayers) ?>.
-    </p>
+      Ingrese credenciales del jugador <?= htmlspecialchars($loginPlayer) ?> de <?= htmlspecialchars($countPlayers) ?>.
     <?php endif; ?>
 
   <form action="login.php" method="post">
