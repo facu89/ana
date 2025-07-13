@@ -21,7 +21,11 @@ session_start();
       exit;
     }
   ?>
-   <header><p class="WelcomeText_1">Bienvenido a Ana</p></header>
+   <header><p class="WelcomeText_1">Bienvenido a Ana</p>
+  <div style="position:absolute;top:20px;right:30px;">
+    <a href="login.php?reset=1" style="color:#c4b2ff;text-decoration:none;font-size:1rem;">Cerrar sesión</a>
+  </div>
+</header>
    <p class="WelcomeText_2">Seleccione la configuracion de la partida.</p>
 
   <div class="lobbyMain">

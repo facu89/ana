@@ -1,5 +1,4 @@
 <?php
-// Solo destruye la sesión si realmente quieres reiniciar el juego, por ejemplo, si accedes sin parámetros y es el inicio absoluto
 if (isset($_GET['reset'])) {
     session_start();
     session_unset();
@@ -18,22 +17,17 @@ $loginPlayer  = (int)($_POST['loginPlayer']   ?? $_GET['loginPlayer']   ?? 1);
 
 $errors = [];
 
-// Si hay errores y POST, mantener los valores originales para el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($errors)) {
-    // Mantener el loginPlayer del POST
     $loginPlayer = (int)($_POST['loginPlayer'] ?? $loginPlayer);
     $countPlayers = (int)($_POST['selectPlayers'] ?? $countPlayers);
     $size = (int)($_POST['selectSize'] ?? $size);
 }
 
-// Protección extra: si el primer usuario ya está logueado y se accede a login.php sin POST, redirigir según el jugador
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_SESSION['player1'])) {
-    // Si es el primer jugador, lo mandamos al lobby
     if ($loginPlayer === 1) {
         header("Location: lobby.php");
         exit;
     }
-    // Si es el resto, lo mandamos a game.php si ya están todos
     if ($loginPlayer > 1 && isset($_SESSION['player' . $countPlayers])) {
         header("Location: game.php?selectPlayers=$countPlayers&selectSize=$size");
         exit;

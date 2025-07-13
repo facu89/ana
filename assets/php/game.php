@@ -19,7 +19,11 @@ if(!isset($_SESSION['player1'])){
 <body id="body">
     <?php
     ?>
-   <header>A jugar!</header>
+   <header>A jugar!
+      <div style="position:absolute;top:20px;right:30px;">
+        <a href="login.php?reset=1" style="color:#c4b2ff;text-decoration:none;font-size:1rem;">Cerrar sesión</a>
+      </div>
+   </header>
 
 <div id="mainContainer">
   <div id="divGameTable"></div>  

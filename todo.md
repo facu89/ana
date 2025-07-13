@@ -4,3 +4,4 @@
 [x] Proteger las rutas
 [] Terminar partida, abandonar, juego terminado
 [x]Iniciar el repositorio
+[x] Arreglar los login d=
