@@ -3,13 +3,13 @@ require_once("User.class.php");
 $errors    = [];
 $createdMsg = '';
 if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthdate']) 
-&& isset($_POST['country']) && isset($_POST['password']) && isset($_POST['password_2'])) {
+&& isset($_POST['country']) && (isset($_POST['password']) || isset($_POST['passwordHashed'])) && isset($_POST['password_2'])) {
     $user      = trim($_POST['username']   ?? '');
     $email     = trim($_POST['email']      ?? '');
     $birthdate = trim($_POST['birthdate']  ?? '');
     $country   = trim($_POST['country']    ?? '');
-    $pass1     = $_POST['password']        ?? '';
-    $pass2     = $_POST['password_2']      ?? '';
+    $pass1     = $_POST['passwordHashed'] ?? $_POST['password'] ?? '';
+    $pass2     = $_POST['password_2'      ?? ''];
 
     if ($user === '' || ! preg_match('/^[a-zA-Z0-9_]{3,20}$/', $user)) {
         $errors[] = 'Usuario inválido (3–20 car., letras, dígitos o _).';
@@ -20,13 +20,14 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
         $errors[] = 'Fecha de nacimiento inválida.';
     }
 
-
-    if (strlen($pass1) < 8 ||
-        ! preg_match('/[A-Z]/', $pass1) ||! preg_match('/\d/', $pass1)
+    // Validar la contraseña original (no el hash)
+    $originalPass = $_POST['password'] ?? '';
+    if (strlen($originalPass) < 8 ||
+        ! preg_match('/[A-Z]/', $originalPass) ||! preg_match('/\d/', $originalPass)
     ) {
         $errors[] = 'La contraseña debe tener ≥8 car., una mayúscula y un dígito.';
     }
-    if ($pass1 !== $pass2) {
+    if ($originalPass !== $pass2) {
         $errors[] = 'Las contraseñas no coinciden.';
     }
 
@@ -101,7 +102,8 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
             </div>
             <div>
               <div>Contraseña:
-                <input type="password" name="password" required>
+                <input type="password" name="password" id="inpPassword" required>
+                <input type="hidden" name="passwordHashed">
               </div>
             </div>
             <div>

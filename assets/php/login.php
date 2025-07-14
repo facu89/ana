@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/User.class.php';
 if (isset($_GET['reset'])) {
     session_start();
     session_unset();
@@ -8,7 +9,6 @@ if (isset($_GET['reset'])) {
 } else {
     session_start();
 }
-require_once("User.class.php");
 
 
 $countPlayers = (int)($_POST['selectPlayers'] ?? $_GET['selectPlayers'] ?? 3);
@@ -37,18 +37,30 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_SESSION['player1'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
   $user = trim($_POST['username'] ?? '');
-  $password = $_POST['password'] ?? '';
+  // Usar el hash si está presente
+  $password = $_POST['passwordHashed'] ?? $_POST['password'] ?? '';
   if (!User::checkUsernameExist($user)) {
     $errors[] = "Nombre de usuario inválido";
   } elseif (!$user = User::loginUser($user, $password)) {
     $errors[] = "Usuario o contraseña incorrectos";
   } else {
     if (!isset($_SESSION['player1'])) { 
-      $_SESSION['player1'] = $user;
+    $_SESSION['player1'] = [
+  'id' => $user->getId(),
+  'username' => $user->getUsername(),
+  'gameWins' => $user->getGameWins()
+];
+
       header("Location: lobby.php");
       exit;
     }
-    $_SESSION['player' . $loginPlayer] = $user;
+  $_SESSION['player' . $loginPlayer] = [
+  'id' => $user->getId(),
+  'username' => $user->getUsername(),
+  'gameWins' => $user->getGameWins()
+];
+
+
     if ($loginPlayer < $countPlayers) {
       $nextPlayer = $loginPlayer + 1;
       header("Location: login.php?selectPlayers=$countPlayers&selectSize=$size&loginPlayer=$nextPlayer");

@@ -3,7 +3,6 @@ class User {
     private $id;
     private $username;
     private $gameWins;
-    private $turn; //para manejar el turno
     public function __construct(int $id, string $username, int $gameWins){
         $this->id = $id;
         $this->username = $username;
@@ -19,12 +18,7 @@ class User {
     public function getGameWins()  {
         return $this->gameWins;
     }
-    public function getShift(){
-        return $this->turn;
-    }
-    public function setShift(){
-        return $this->turn;
-    }
+    
     public static function registerUser(string $userName, string $password, string $country,string $email, string $birthday){
         $con = new mysqli ("localhost" , "root", "" ,"princess_ana_game") or die ("No se puedo establecer la conexion con el servidor.");
         //preparo la consulta para evitar inyecciones
@@ -86,7 +80,7 @@ class User {
         $prepareQuery->close();
         $con->close();
         if (password_verify($password, $row->password)) {
-            return new User ($row->id_user,$row->user_name,5);
+            return new User ($row->id_user,$row->user_name,self::getGameWinsUser($row->id_user));
         } else {
             return null;
         }
@@ -142,6 +136,28 @@ class User {
         $prepareQuery->close();
         $con->close();
         return false;
+    }
+     public static function getGameWinsUser($id){
+        $con = new mysqli("localhost", "root", "", "princess_ana_game");
+        if ($con->connect_errno) {
+            throw new RuntimeException("Error de conexión: " . $con->connect_error);
+        }
+        $prepareQuery = $con->prepare(
+            "SELECT COUNT(*) AS partidas_ganadas
+            FROM games
+            WHERE id_winner = ?"
+        );
+        $prepareQuery->bind_param("i", $id);
+        $prepareQuery->execute();
+        $result = $prepareQuery->get_result();
+        if ($row = $result->fetch_object()) {
+            $prepareQuery->close();
+            $con->close();
+            return $row->partidas_ganadas;
+        }
+        $prepareQuery->close();
+        $con->close();
+        return 0;
     }
     }
 

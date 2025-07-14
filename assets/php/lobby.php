@@ -17,6 +17,8 @@ session_start();
 <body class="lobby">
   <?php
     if (isset($_GET['btnPlay'])){
+      $countPlayers = (int)$_GET['selectPlayers'];
+      $_SESSION['countPlayers'] = $countPlayers;
       header("Location: login.php?selectPlayers=" . urlencode($_GET['selectPlayers']) . "&selectSize=" . urlencode($_GET['selectSize'])."&loginPlayer=2");
       exit;
     }
