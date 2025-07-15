@@ -61,7 +61,7 @@ class User {
                      return false;
         }
     }
-   public static function loginUser(string $userName, string $password){
+   public static function loginUser(string $userName, string $passwordHashed){
     $con = new mysqli("localhost", "root", "", "princess_ana_game");
     if ($con->connect_errno) {
         throw new RuntimeException("Error de conexión: " . $con->connect_error);
@@ -79,7 +79,9 @@ class User {
     if ($row = $result->fetch_object()) {
         $prepareQuery->close();
         $con->close();
-        if (password_verify($password, $row->password)) {
+        // passwordHashed es el hash SHA-256 enviado por el cliente
+        // password es el hash generado por password_hash y guardado en la base
+        if (password_verify($passwordHashed, $row->password)) {
             return new User ($row->id_user,$row->user_name,self::getGameWinsUser($row->id_user));
         } else {
             return null;

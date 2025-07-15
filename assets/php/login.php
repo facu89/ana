@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['passwordHashed'] ?? $_POST['password'] ?? '';
   if (!User::checkUsernameExist($user)) {
     $errors[] = "Nombre de usuario inválido";
-  } elseif (!$user = User::loginUser($user, $password)) {
+  } 
+  if (!$user = User::loginUser($user, $password)) {
     $errors[] = "Usuario o contraseña incorrectos";
   } else {
     if (!isset($_SESSION['player1'])) { 
