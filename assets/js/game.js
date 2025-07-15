@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const countPlayers = params.get("selectPlayers");
     const size = parseInt(params.get("selectSize"));
     var playerOfTurn;
-
+    const btnAbandonner = document.getElementById("btnEndGame");
+    btnAbandonner.addEventListener("click", abandonnerTout);
     function chargerPlayers() {
         var peticion = new XMLHttpRequest();
         peticion.open("GET", "../php/playersData.php", true);
@@ -153,8 +154,26 @@ document.addEventListener("DOMContentLoaded", () => {
         return count;
     }
     function endGame() {
+        var playersInGame = players.filter(player => player.getInGame());
+        if (playersInGame.length > 0) {
+            // Encuentra el puntaje máximo
+            let maxScore = Math.max(...playersInGame.map(p => p.getScore()));
+            // Filtra los ganadores
+            let playersWinners = playersInGame.filter(p => p.getScore() === maxScore);
+            if (playersWinners.length > 1) {
+                var textResult = 'Los jugadores: ';
+                playersWinners.forEach(player => {
+                    textResult += player.getName() + ', ';
+                });
+                textResult = textResult.slice(0, -2);
+                document.getElementById("result").textContent = textResult + " han ganado la partida.";
+            } else {
+                document.getElementById("result").textContent = "El jugador " + playersWinners[0].getName() + " ha ganado la partida.";
+            }
+        } else {
+            document.getElementById("result").textContent = "Todos han abandonado, no hay ganadores en la partida.";
+        }
         console.log("termino el juego");
-
     }
     function getFirstPlayer() {
         var firstPlayer;
@@ -205,5 +224,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function getTotalScore() {
         return players.reduce((sum, player) => sum + player.getScore(), 0);
+    }
+    function abandonnerTout() {
+        players.forEach(player => {
+            player.abandon();
+        });
+        uploadResultsDOM();
+        endGame();
     }
 });

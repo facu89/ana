@@ -45,30 +45,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = "Usuario o contraseña incorrectos";
   } else {
     if (!isset($_SESSION['player1'])) { 
-    $_SESSION['player1'] = [
-  'id' => $user->getId(),
-  'username' => $user->getUsername(),
-  'gameWins' => $user->getGameWins()
-];
-
-      header("Location: lobby.php");
-      exit;
+        $_SESSION['player1'] = [
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'gameWins' => $user->getGameWins()
+        ];
+        header("Location: lobby.php");
+        exit;
     }
-  $_SESSION['player' . $loginPlayer] = [
-  'id' => $user->getId(),
-  'username' => $user->getUsername(),
-  'gameWins' => $user->getGameWins()
-];
-
-
-    if ($loginPlayer < $countPlayers) {
-      $nextPlayer = $loginPlayer + 1;
-      header("Location: login.php?selectPlayers=$countPlayers&selectSize=$size&loginPlayer=$nextPlayer");
-      exit;
+    $isRegistered = false;
+    for ($i = 1; $i < $loginPlayer; $i++) {
+        if ($_SESSION['player' . $i]['username'] == $user->getUsername()) {
+            $errors[] = "Este jugador ya se encuentra registrado para esta partida. Ingrese otro usuario.";
+            $isRegistered = true;
+            break;
+        }
     }
-    header("Location: game.php?selectPlayers=$countPlayers&selectSize=$size");
-    exit;
+    if (!$isRegistered) {
+        $_SESSION['player' . $loginPlayer] = [
+            'id' => $user->getId(),
+            'username' => $user->getUsername(),
+            'gameWins' => $user->getGameWins()
+        ];
+        if ($loginPlayer < $countPlayers) {
+            $nextPlayer = $loginPlayer + 1;
+            header("Location: login.php?selectPlayers=$countPlayers&selectSize=$size&loginPlayer=$nextPlayer");
+            exit;
+        }
+        header("Location: game.php?selectPlayers=$countPlayers&selectSize=$size");
+        exit;
+    }
   }
+
 }
 ?>
 <!DOCTYPE html>

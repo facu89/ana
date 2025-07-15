@@ -30,10 +30,12 @@ if(!isset($_SESSION['player1'])){
 
   <div id="sidePanel">
       <button id="btnChangeLetter">Cambiar letra</button>
-      <button id="btnEndGame">Abandonar todos</button>
       <div id="textSelectedLetter"></div>
+
       <div id="textResults"></div>
+            <button id="btnEndGame">Abandonar todos</button>
   </div>
+  <div id="result"></div>
 </div>
 
 <footer>
