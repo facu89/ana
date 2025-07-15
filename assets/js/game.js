@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const countPlayers = params.get("selectPlayers");
     const size = parseInt(params.get("selectSize"));
     var playerOfTurn;
+    var gameEnded = false;
     const btnAbandonner = document.getElementById("btnEndGame");
     btnAbandonner.addEventListener("click", abandonnerTout);
     function chargerPlayers() {
@@ -47,9 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 let box = document.createElement('div');
                 box.className = 'divBoxGame';
                 let button = document.createElement('button');
-                button.className = 'btnBox';
                 button.value = '';
                 button.textContent = '-';
+                button.classList.add('btnBox', 'btnGameBox');
                 button.addEventListener("click", () => {
                     button.textContent = letter;
                     button.disabled = true;
@@ -174,6 +175,12 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("result").textContent = "Todos han abandonado, no hay ganadores en la partida.";
         }
         console.log("termino el juego");
+        gameEnded = true;
+        // Deshabilitar todos los botones de la tabla de juego
+        const boxButtons = Array.from(document.getElementsByClassName('btnGameBox'));
+        boxButtons.forEach(button => {
+            button.disabled = true;
+        });
     }
     function getFirstPlayer() {
         var firstPlayer;
@@ -197,9 +204,16 @@ document.addEventListener("DOMContentLoaded", () => {
     function uploadResultsDOM() {
         const divTextResults = document.getElementById('textResults');
         divTextResults.innerHTML = '';
-        var div = document.createElement('div');
-        div.textContent = 'Turno de: ' + playerOfTurn.getName();
-        divTextResults.appendChild(div);
+        // Verifica si hay jugadores en juego
+        if (players.some(p => p.getInGame())) {
+            var div = document.createElement('div');
+            div.textContent = 'Turno de: ' + playerOfTurn.getName();
+            divTextResults.appendChild(div);
+        } else {
+            var div = document.createElement('div');
+            div.textContent = 'La partida ha terminado.';
+            divTextResults.appendChild(div);
+        }
         players.forEach(player => {
             div = document.createElement('div');
             div.className = 'divPlayerResults';
@@ -209,23 +223,30 @@ document.addEventListener("DOMContentLoaded", () => {
             else {
                 div.textContent = 'El jugador ' + player.getName() + ' ha abandoando.';
             }
-            var button = document.createElement('button');
-            button.className = 'btn';
-            button.textContent = 'Abandonar';
-            button.addEventListener('click', function () {
-                button.disabled = true;
-                player.abandon();
-                uploadResultsDOM();
-                endGame();
-            })
-            divTextResults.appendChild(div);
-            divTextResults.appendChild(button);
+            // Solo crear el botón si el juego no terminó y el jugador está en juego
+            if (!gameEnded && player.getInGame()) {
+                var button = document.createElement('button');
+                button.className = 'btn';
+                button.textContent = 'Abandonar';
+                button.addEventListener('click', function () {
+                    if (gameEnded) return;
+                    button.disabled = true;
+                    player.abandon();
+                    uploadResultsDOM();
+                    endGame();
+                });
+                divTextResults.appendChild(div);
+                divTextResults.appendChild(button);
+            } else {
+                divTextResults.appendChild(div);
+            }
         });
     }
     function getTotalScore() {
         return players.reduce((sum, player) => sum + player.getScore(), 0);
     }
     function abandonnerTout() {
+        if (gameEnded) return; // Evita acciones si el juego terminó
         players.forEach(player => {
             player.abandon();
         });
