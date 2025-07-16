@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         players.push(player);
                     });
                             play = new Game(players);
-
                     // Inicializar dependencias de players aquí
                     playerOfTurn = getFirstPlayer();
                     console.log(playerOfTurn);
@@ -41,8 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
         peticion.send();
-
-    
     }
 
     

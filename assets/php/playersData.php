@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-$countPlayers = $_SESSION['countPlayers'] ?? 2;
+$countPlayers = $_SESSION['countPlayers'] ?? 0;
 $players = [];
 
 for ($i = 1; $i <= $countPlayers; $i++) {
@@ -10,7 +10,7 @@ for ($i = 1; $i <= $countPlayers; $i++) {
         $players[] = [
             'id' => $playerSession['id'],
             'name' => $playerSession['username'],
-            'turn' => $i
+            'turn' => $_SESSION['turn' . $i]  ?? null,
         ];
     }
 }

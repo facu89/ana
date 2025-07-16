@@ -156,6 +156,27 @@ class User {
     return 0;
         }
 
+    public static function getGamesWonByUser($id) {
+        $con = new mysqli("localhost", "root", "", "princess_ana_game");
+        if ($con->connect_errno) {
+            throw new RuntimeException("Error de conexión: " . $con->connect_error);
+        }
+        $prepareQuery = $con->prepare(
+            "SELECT COUNT(*) AS partidas_ganadas
+             FROM game_winners
+             WHERE id_user = ?"
+        );
+        $prepareQuery->bind_param("i", $id);
+        $prepareQuery->execute();
+        $result = $prepareQuery->get_result();
+        if ($row = $result->fetch_object()) {
+            $prepareQuery->close();
+            $con->close();
+            return $row->partidas_ganadas;
+        }
+        $prepareQuery->close();
+        $con->close();
+        //por las dudas
+        return 0;
     }
-
-?>
+} ?>

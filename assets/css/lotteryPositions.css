@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
+  color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #d7bfff;
+  text-shadow: 1px 1px 4px #7c5fc3;
+}
+
+#resultLastGames {
+  margin: 10px 0;
+  background-color: #2a2a3c;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-size: 1rem;
+  color: #b8ffb8;
+}
+
+.WelcomeText_1,
+.WelcomeText_2,
+.WelcomeText_3 {
+  text-align: center;
+  margin: 5px 0;
+}
+
+.WelcomeText_1 {
+  font-size: 1.8rem;
+  color: #d7bfff;
+  text-shadow: 1px 1px 4px #7c5fc3;
+}
+
+.WelcomeText_2,
+.WelcomeText_3 {
+  font-size: 1rem;
+  color: #b8a5ff;
+}
+
+#dados {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+#btnSortearPosiciones {
+  padding: 10px 20px;
+  background-color: #5f4b8b;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+#btnSortearPosiciones:hover {
+  background-color: #7a62a7;
+}
+
+.LotteryFooter {
+  margin-top: auto;
+  padding: 20px;
+  font-size: 0.9rem;
+  background-color: #161620;
+  width: 100%;
+  text-align: center;
+  color: #aaa;
+}
+
+.LotteryFooter a {
+  color: #c4b2ff;
+  text-decoration: none;
+}
+
+.LotteryFooter a:hover {
+  text-decoration: underline;
+}

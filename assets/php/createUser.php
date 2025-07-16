@@ -1,6 +1,5 @@
 <?php
 
-use Dom\Document;
 
 require_once("User.class.php");
 $errors    = [];
