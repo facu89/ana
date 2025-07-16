@@ -35,16 +35,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_SESSION['player1'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  
   $user = trim($_POST['username'] ?? '');
-  // Usar el hash si está presente
-  $password = $_POST['passwordHashed'] ?? $_POST['password'] ?? '';
+  $password = $_POST['passwordHashed'] ?? '';
+ 
   if (!User::checkUsernameExist($user)) {
     $errors[] = "Nombre de usuario inválido";
-  } 
-  if (!$user = User::loginUser($user, $password)) {
+  }
+  if ($password === '') {
+    $errors[] = "Contraseña inválida";
+  }
+  if (empty($errors) && !$user = User::loginUser($user, $password)) {
     $errors[] = "Usuario o contraseña incorrectos";
-  } else {
+  } else if (empty($errors)) {
     if (!isset($_SESSION['player1'])) { 
         $_SESSION['player1'] = [
             'id' => $user->getId(),
@@ -86,8 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="UTF-8">
   <title>Ana – Login Jugador <?= $loginPlayer ?></title>
   <link rel="stylesheet" href="../css/login.css">
-<!--  <script src="login.js" type="text/javascript"></script> -->
+  <script src="../js/login.js"></script>
+  <link rel="icon" href="../princesaAna.png" type="image/png"/>
+
 </head>
+
 <body>
   <header><p class="WelcomeText_1">Bienvenido a Ana</p></header>
   <p class="WelcomeText_2">

@@ -6,6 +6,9 @@ export default class Player{
         this.turn = turn;
         this.inGame = true;
     }
+    getId(){
+        return this.id;
+    }
     addPoints(n){
         this.score +=n;
     }

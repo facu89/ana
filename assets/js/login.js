@@ -1,14 +1,17 @@
-const btnStartSession= document.getElementById("btnStartSession");
+document.addEventListener("DOMContentLoaded", function() {
+    const btnStartSession= document.getElementById("btnStartSession");
 // Hashea la contraseña usando SHA-256
 // Retorna una promesa que resuelve con el hash de la contraseña
 btnStartSession.addEventListener("click", async function(e){
     var passwordInput = document.getElementById("inpPassword");
     if(passwordInput && passwordInput.value !== ""){
         e.preventDefault(); // Evita el submit por defecto
+
         const hashed = await hashPassword(passwordInput.value);
+        console.log("Hash generado:", hashed); // DEBUG
+
         document.querySelector("input[name='passwordHashed']").value = hashed;
-        passwordInput.value = ""; // Opcional: borra el campo
-        // Envía el formulario manualmente
+      
         btnStartSession.closest("form").submit();
     }
 });
@@ -22,3 +25,4 @@ async function hashPassword(password) {
 }
 
 // Hasheo la contrasenia en del lado del cliente para mayor seguridad
+})

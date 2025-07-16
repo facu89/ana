@@ -1,16 +1,18 @@
 <?php
+
+use Dom\Document;
+
 require_once("User.class.php");
 $errors    = [];
 $createdMsg = '';
 if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthdate']) 
-&& isset($_POST['country']) && (isset($_POST['password']) || isset($_POST['passwordHashed'])) && isset($_POST['password_2'])) {
+&& isset($_POST['country']) && (isset($_POST['password']) && isset($_POST['passwordHashed'])) && isset($_POST['password_2'])) {
     $user      = trim($_POST['username']   ?? '');
     $email     = trim($_POST['email']      ?? '');
     $birthdate = trim($_POST['birthdate']  ?? '');
     $country   = trim($_POST['country']    ?? '');
     $pass1     = $_POST['passwordHashed'] ?? $_POST['password'] ?? '';
     $pass2     = $_POST['password_2'      ?? ''];
-
     if ($user === '' || ! preg_match('/^[a-zA-Z0-9_]{3,20}$/', $user)) {
         $errors[] = 'Usuario inválido (3–20 car., letras, dígitos o _).';
     }
@@ -19,9 +21,11 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
     if (! $day || $day->format('Y-m-d') !== $birthdate) {
         $errors[] = 'Fecha de nacimiento inválida.';
     }
-
+    $passwordHashed = $_POST['passwordHashed'];
     // Validar la contraseña original (no el hash)
     $originalPass = $_POST['password'] ?? '';
+  
+
     if (strlen($originalPass) < 8 ||
         ! preg_match('/[A-Z]/', $originalPass) ||! preg_match('/\d/', $originalPass)
     ) {
@@ -34,7 +38,7 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
     if (empty($errors)) {
         if(!User::checkUsernameExist($user)){
             if(!User::checkEmailExist($email)){
-                if(User::registerUser( $user,  $pass1,  $country, $email,  $birthdate)){
+                if(User::registerUser( $user,  $passwordHashed,  $country, $email,  $birthdate)){
                     $createdMsg ='Usuario creado con exito, ya puede iniciar sesion.';
                 }
                 else{
@@ -58,7 +62,7 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
   <meta charset="UTF-8">
   <title>Crear Usuario</title>
     <link rel="stylesheet" href="../css/createUser.css">
-
+  <script src="../js/createUser.js"></script>
 </head>
 <body>
   <header>
@@ -114,7 +118,7 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
         </div>
   </div>
    
-    <button type="submit">Crear usuario</button>
+    <button type="submit" id="btnStartSession">Crear usuario</button>
   </form>
   <?php
   if (! empty($errors)) {

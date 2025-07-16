@@ -9,3 +9,5 @@
 []Mostrar la cantidad de partidas por jugadores
 [] Hacer que se actualicen los datos de jugadores despues de cada partida
 [] Hacer lo del sorteo de turnos //esto para lo ultimo 
+[] Si estoy en el lobby, y vuelvo para atras, me hace loguear de nuevo, pero despues se saltea el lobby, cuando tendrua que volver al lobby
+[Ambiguedad] En caso de empate, quienes empaten suman puntos.

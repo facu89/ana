@@ -33,16 +33,11 @@ class User {
             "Error al preparar la consulta: " . $con->error
         );
         }
-        //hago un hash de la contrasenia para guardarla encriptada
-        $passwordHash = password_hash(
-        $password,
-        PASSWORD_DEFAULT,
-        ['cost' => 12]
-        );
+        // Guardar el hash recibido del cliente directamente
         $prepareQuery->bind_param(
             "sssss",
             $userName,
-            $passwordHash,
+            $password,
             $country,
             $email,
             $birthday
@@ -79,9 +74,8 @@ class User {
     if ($row = $result->fetch_object()) {
         $prepareQuery->close();
         $con->close();
-        // passwordHashed es el hash SHA-256 enviado por el cliente
-        // password es el hash generado por password_hash y guardado en la base
-        if (password_verify($passwordHashed, $row->password)) {
+        // Comparar el hash recibido del cliente directamente con el guardado
+        if ($passwordHashed === $row->password) {
             return new User ($row->id_user,$row->user_name,self::getGameWinsUser($row->id_user));
         } else {
             return null;
@@ -140,27 +134,28 @@ class User {
         return false;
     }
      public static function getGameWinsUser($id){
-        $con = new mysqli("localhost", "root", "", "princess_ana_game");
-        if ($con->connect_errno) {
-            throw new RuntimeException("Error de conexión: " . $con->connect_error);
-        }
-        $prepareQuery = $con->prepare(
-            "SELECT COUNT(*) AS partidas_ganadas
-            FROM games
-            WHERE id_winner = ?"
-        );
-        $prepareQuery->bind_param("i", $id);
-        $prepareQuery->execute();
-        $result = $prepareQuery->get_result();
-        if ($row = $result->fetch_object()) {
-            $prepareQuery->close();
-            $con->close();
-            return $row->partidas_ganadas;
-        }
+    $con = new mysqli("localhost", "root", "", "princess_ana_game");
+    if ($con->connect_errno) {
+        throw new RuntimeException("Error de conexión: " . $con->connect_error);
+    }
+    $prepareQuery = $con->prepare(
+        "SELECT COUNT(*) AS partidas_ganadas
+         FROM game_winners
+         WHERE id_user = ?"
+    );
+    $prepareQuery->bind_param("i", $id);
+    $prepareQuery->execute();
+    $result = $prepareQuery->get_result();
+    if ($row = $result->fetch_object()) {
         $prepareQuery->close();
         $con->close();
-        return 0;
+        return $row->partidas_ganadas;
     }
+    $prepareQuery->close();
+    $con->close();
+    return 0;
+        }
+
     }
 
 ?>
