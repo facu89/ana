@@ -10,6 +10,34 @@ body {
   min-height: 100vh;
 }
 
+#statusText{
+    height: 40px;
+    width: 200px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+}
+#divDices{
+    margin: 30px;
+    display: flex;
+    flex-direction: row;
+}
+.imgDice{
+    width: 50px;
+    height: 50px;
+}
+
+.dicePlayer{
+    display:flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40px;
+        margin-right: 40px;
+
+}
 header {
   font-size: 2rem;
   margin: 20px 0;
@@ -55,7 +83,7 @@ header {
   margin: 20px 0;
 }
 
-#btnSortearPosiciones {
+.btn {
   padding: 10px 20px;
   background-color: #5f4b8b;
   border: none;
@@ -67,7 +95,7 @@ header {
   font-size: 1rem;
   margin-bottom: 20px;
 }
-#btnSortearPosiciones:hover {
+.btn:hover {
   background-color: #7a62a7;
 }
 
@@ -88,4 +116,34 @@ header {
 
 .LotteryFooter a:hover {
   text-decoration: underline;
+}
+.logout-form {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    margin: 0;
+    z-index: 10;
+}
+.btn-logout {
+    background: #2a2a3c;
+    color: #fff;
+    border: 1px solid #5f4b8b;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(123, 74, 226, 0.10);
+    outline: none;
+}
+.btn-logout:hover {
+    background: #5f4b8b;
+    color: #fff;
+    border: 1px solid #7a62a7;
+}
+.logout-container{
+    position: absolute;
+    top:20px;
+    right: 20px;
 }

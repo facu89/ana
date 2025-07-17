@@ -24,12 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($errors)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_SESSION['player1'])) {
-    if ($loginPlayer === 1) {
+    // Si NO hay loginPlayer en GET o es 1, ir al lobby (primer login)
+    if (!isset($_GET['loginPlayer']) || $loginPlayer === 1) {
         header("Location: lobby.php");
         exit;
     }
+    // Si ya están todos logueados, ir al sorteo o al juego
     if ($loginPlayer > 1 && isset($_SESSION['player' . $countPlayers])) {
-        header("Location: game.php?selectPlayers=$countPlayers&selectSize=$size");
+        header("Location: LotteryPositions.php?selectPlayers=$countPlayers&selectSize=$size");
         exit;
     }
 }
@@ -75,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: login.php?selectPlayers=$countPlayers&selectSize=$size&loginPlayer=$nextPlayer");
             exit;
         }
-        header("Location: game.php?selectPlayers=$countPlayers&selectSize=$size");
+        header("Location: LotteryPositions.php?selectPlayers=$countPlayers&selectSize=$size");
         exit;
     }
   }

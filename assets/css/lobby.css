@@ -145,3 +145,33 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+.logout-form {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    margin: 0;
+    z-index: 10;
+}
+.btn-logout {
+    background: #2a2a3c;
+    color: #fff;
+    border: 1px solid #5f4b8b;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(123, 74, 226, 0.10);
+    outline: none;
+}
+.btn-logout:hover {
+    background: #5f4b8b;
+    color: #fff;
+    border: 1px solid #7a62a7;
+}
+.logout-container{
+    position: absolute;
+    top:20px;
+    right: 20px;
+}

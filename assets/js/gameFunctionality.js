@@ -1,10 +1,10 @@
 import Player from './Player.js';
 import Game from './game.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-    const players = [];
-     chargerPlayers();
-    var play;
+document.addEventListener("DOMContentLoaded", async () => {
+    const players = await chargerPlayers();
+    //esto lo hago para que no se cargue hasta que no esten los jugadores
+    let play = new Game(players);
 
     var letter = 'A';
     const params = new URLSearchParams(window.location.search);
@@ -14,35 +14,41 @@ document.addEventListener("DOMContentLoaded", () => {
     var gameEnded = false;
     const btnAbandonner = document.getElementById("btnEndGame");
     btnAbandonner.addEventListener("click", abandonnerTout);
+    playerOfTurn = getFirstPlayer();
+    console.log(playerOfTurn);
+    document.getElementById("textSelectedLetter").textContent = "Letra: " + letter;
+    generateTable();
+    uploadResultsDOM();
+    const btnChangeLetter = document.getElementById("btnChangeLetter");
+    btnChangeLetter.addEventListener("click", changeLetter);
+
     function chargerPlayers() {
-        var peticion = new XMLHttpRequest();
-        peticion.open("GET", "../php/playersData.php", true);
-        peticion.onreadystatechange = function() {
-            if (peticion.readyState === 4) {
-                try {
-                    const playersData = JSON.parse(peticion.responseText);
-                    playersData.forEach(data => {
-                        const player = new Player(data.id, data.name, data.turn);
-                        players.push(player);
-                    });
-                            play = new Game(players);
-                    // Inicializar dependencias de players aquí
-                    playerOfTurn = getFirstPlayer();
-                    console.log(playerOfTurn);
-                    document.getElementById("textSelectedLetter").textContent = "Letra: " + letter;
-                    generateTable();
-                    uploadResultsDOM();
-                    const btnChangeLetter = document.getElementById("btnChangeLetter");
-                    btnChangeLetter.addEventListener("click", changeLetter);
-                } catch (e) {
-                    console.error("Respuesta inválida:", peticion.responseText);
+        //esto lo hago para que no se cargue el juego hasta que no 
+        //esten listos los jugadores
+        return new Promise((resolve, reject) => {
+            var players = [];
+            var peticion = new XMLHttpRequest();
+            peticion.open("GET", "../php/playersData.php", true);
+            peticion.onreadystatechange = function() {
+                if (peticion.readyState === 4 && peticion.status === 200) {
+                    try {
+                        const playersData = JSON.parse(peticion.responseText);
+                        playersData.forEach(data => {
+                            const player = new Player(data.id, data.name, data.turn);
+                            players.push(player);
+                        });
+                        console.log("Jugadores cargados:", players);
+                        resolve(players);
+                    } catch (e) {
+                        console.error("Respuesta inválida:", peticion.responseText);
+                        resolve([]);
+                    }
                 }
-            }
-        };
-        peticion.send();
+            };
+            peticion.send();
+        });
     }
 
-    
     function generateTable() {
         const divTable = document.getElementById("divGameTable");
         divTable.style.setProperty("--n", size);
@@ -211,6 +217,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function uploadResultsDOM() {
         const divTextResults = document.getElementById('textResults');
+        const divPlayersButtons = document.createElement( 'div');
+        divPlayersButtons.className = 'divPlayersButtons';
         divTextResults.innerHTML = '';
         // Verifica si hay jugadores en juego
         if (players.some(p => p.getInGame())) {
@@ -232,6 +240,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 div.textContent = 'El jugador ' + player.getName() + ' ha abandoando.';
             }
             // Solo crear el botón si el juego no terminó y el jugador está en juego
+            var divContainer = document.createElement('div');
+            var divContainerButton = document.createElement('div');
+            divContainerButton.className = 'divContainerButton';
             if (!gameEnded && player.getInGame()) {
                 var button = document.createElement('button');
                 button.className = 'btn';
@@ -241,12 +252,30 @@ document.addEventListener("DOMContentLoaded", () => {
                     button.disabled = true;
                     player.abandon();
                     uploadResultsDOM();
-                    endGame();
+                    var playersInGame = players.filter(p => p.getInGame());
+                    if(playersInGame.length<2){
+                        endGame();
+
+                    }
+
+                    console.log(playersInGame.length);
                 });
-                divTextResults.appendChild(div);
-                divTextResults.appendChild(button);
+                divContainer.className = 'divPlayerButton';
+                divContainer.appendChild(div);
+                divContainerButton.appendChild(button);
+                divContainer.appendChild(divContainerButton);
+
+                divPlayersButtons.appendChild(divContainer);
+                divTextResults.appendChild(divPlayersButtons);
             } else {
-                divTextResults.appendChild(div);
+                divContainer.className = 'divPlayerButton';
+                divContainer.appendChild(div);
+                                divContainer.appendChild(divContainerButton);
+
+                divPlayersButtons.appendChild(divContainer);
+
+                divTextResults.appendChild(divPlayersButtons);
+
             }
         });
     }

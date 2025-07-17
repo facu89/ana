@@ -20,23 +20,30 @@ if(!isset($_SESSION['player1'])){
     <?php
     ?>
    <header>A jugar!
-      <div style="position:absolute;top:20px;right:30px;">
-        <a href="login.php?reset=1" style="color:#c4b2ff;text-decoration:none;font-size:1rem;">Cerrar sesión</a>
-      </div>
+
+ <div class="logout-container">
+            <a href="login.php?reset=1" class="btn btn-logout">Cerrar sesión</a>
+    </div>
    </header>
 
 <div id="mainContainer">
   <div id="divGameTable"></div>  
 
   <div id="sidePanel">
-      <button id="btnChangeLetter">Cambiar letra</button>
+    <div class="divChangeLetter">
+   <button id="btnChangeLetter">Cambiar letra</button>
       <div id="textSelectedLetter"></div>
+    </div>
+   
 
-      <div id="textResults"></div>
-            <button id="btnEndGame">Abandonar todos</button>
-              <div id="result"></div>
+
   </div>
-</div>
+      <div id="textResults"></div>
+      <div id="divAbandonButtonResult">
+        <button id="btnEndGame">Abandonar todos</button>
+        <div id="result"></div>
+      </div>
+  </div>
 
 <footer>
   <p>Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  

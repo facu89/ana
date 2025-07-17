@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if(isset($_POST['btnPlayGames']) && isset($_POST['countPlayers']) && isset($_POST['selectSize'])) {
+    $countPlayers = (int)$_POST['countPlayers'];
+    $size = (int)($_POST['selectSize'] ?? 3);
+        header("Location: game.php?selectPlayers=$countPlayers&selectSize=$size");
+    exit;
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,12 +22,23 @@
 </head>
 <body>
     <header><p class="WelcomeText_1">Bienvenidos a Ana</p></header>
+    <div class="logout-container">
+            <a href="login.php?reset=1" class="btn btn-logout">Cerrar sesión</a>
+    </div>
+
     <div id="resultLastGames"></div>
     <p class="WelcomeText_2">Antes de jugar, deben sortarse las posiciones de los jugadores.</p>
     <p class="WelcomeText_3">Presione el botón para sortear las posiciones.</p>
     <div id="divDices"></div>
 
-    <button id="btnSortearPosiciones">Sortear posiciones</button>
+    <button id="btnLotteryPositions" class="btn">Sortear posiciones</button>
+    <form action="lotteryPositions.php" method="post">
+        <input type="hidden" name="countPlayers" value="<?= htmlspecialchars($_GET['selectPlayers'] ?? 0) ?>">
+        <input type="hidden" name="selectSize" value="<?= htmlspecialchars($_GET['selectSize'] ?? 0) ?>">
+        <button id="btnPlayGame" class="btn" disabled="true" type="submit" name="btnPlayGames">Jugar</button>
+
+    </form>
+
     <footer class="LotteryFooter">
     <p>Creado por Facundo Vidal · 
       <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  
