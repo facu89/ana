@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if(!isset($_SESSION['player1'])){
+        header("Location: login.php");
+        exit;
+}  
 if(isset($_POST['btnPlayGames']) && isset($_POST['countPlayers']) && isset($_POST['selectSize'])) {
     $countPlayers = (int)$_POST['countPlayers'];
     $size = (int)($_POST['selectSize'] ?? 3);

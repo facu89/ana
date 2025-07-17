@@ -1,13 +1,23 @@
 <?php
 require_once __DIR__ . '/User.class.php';
-if (isset($_GET['reset'])) {
-    session_start();
+//esto es para que si el usuario volvio para atras, se desruya la session
+//para forzarlo a loguear session nuevamente, y que no ocurran errores
+      session_start();
+
+if(isset($_SESSION['player1']) && !isset($_GET['loginPlayer'])) {
+
     session_unset();
     session_destroy();
     header("Location: login.php");
     exit;
-} else {
-    session_start();
+
+}
+//por si el usuario decidio cerrar la sesion, se resetea.
+if (isset($_GET['reset'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit;
 }
 
 
