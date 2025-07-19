@@ -26,7 +26,7 @@ session_start();
    <header><p class="WelcomeText_1">Bienvenido a Ana</p>
 <div class="logout-container">
             <a href="login.php?reset=1" class="btn btn-logout">Cerrar sesión</a>
-    </div>
+<a href="manual.php?back=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-logout">¿Cómo jugar?</a>    </div>
 </header>
    <p class="WelcomeText_2">Seleccione la configuracion de la partida.</p>
 

@@ -4,7 +4,8 @@ require_once __DIR__ . '/User.class.php';
 //para forzarlo a loguear session nuevamente, y que no ocurran errores
       session_start();
 
-if(isset($_SESSION['player1']) && !isset($_GET['loginPlayer'])) {
+
+if((isset($_SESSION['player1']) && !isset($_GET['loginPlayer']))  && !isset($_POST['selectPlayers'])  ) {
 
     session_unset();
     session_destroy();

@@ -23,8 +23,7 @@ if(!isset($_SESSION['player1'])){
 
  <div class="logout-container">
             <a href="login.php?reset=1" class="btn btn-logout">Cerrar sesión</a>
-    </div>
-   </header>
+<a href="manual.php?back=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-logout">¿Cómo jugar?</a>   </header>
 
 <div id="mainContainer">
   <div id="divGameTable"></div>  

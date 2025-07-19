@@ -101,6 +101,7 @@ button {
     border-radius: 8px;
     cursor: pointer;
     transition: 0.2s ease;
+    
 }
 
 button:hover {
@@ -125,6 +126,7 @@ button:hover {
     transition: background 0.2s, border 0.2s, color 0.2s;
     box-shadow: 0 2px 8px rgba(123, 74, 226, 0.10);
     outline: none;
+    text-decoration: none;
 }
 .btn-logout:hover {
     background: #5f4b8b;

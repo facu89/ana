@@ -27,8 +27,8 @@ if(isset($_POST['btnPlayGames']) && isset($_POST['countPlayers']) && isset($_POS
     <header><p class="WelcomeText_1">Bienvenidos a Ana</p></header>
     <div class="logout-container">
             <a href="login.php?reset=1" class="btn btn-logout">Cerrar sesión</a>
+<a href="manual.php?back=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-logout">¿Cómo jugar?</a>
     </div>
-
     <div id="resultLastGames"></div>
     <p class="WelcomeText_2">Antes de jugar, deben sortarse las posiciones de los jugadores.</p>
     <p class="WelcomeText_3">Presione el botón para sortear las posiciones.</p>
