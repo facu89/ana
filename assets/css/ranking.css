@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e1e2f;
+  color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header_ranking {
+  font-size: 2rem;
+  padding: 20px 20px 10px;
+  color: #d7bfff;
+  text-shadow: 1px 1px 4px #7c5fc3;
+  text-align: center;
+}
+
+#content {
+  margin: 20px auto;
+  padding: 20px 25px;
+  background-color: #2a2a3c;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Primeros 5 jugadores */
+.rowRankin {
+  background-color: #3a2f5a;
+  color: #ffd700;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 0 5px #7c5fc3;
+}
+
+/* Resto del ranking */
+.rowRankinFive {
+  background-color: #1e1e2f;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #f0f0f0;
+  border: 1px solid #333;
+}
+
+.nameRanking,
+.nameRankingFive {
+  flex: 1;
+  text-align: left;
+}
+
+.gamesRankin,
+.gamesRankinFive {
+  flex: 0 0 50px;
+  text-align: right;
+}
+
+/* Botón volver a jugar */
+.btn-playAgain {
+  display: inline-block;
+  margin: 10px;
+  padding: 8px 14px;
+  background-color: #5f4b8b;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-playAgain:hover {
+  background-color: #7a62a7;
+}
+
+/* Footer */
+.footer_ranking {
+  margin-top: auto;
+  padding: 20px;
+  font-size: 0.9rem;
+  background-color: #161620;
+  width: 100%;
+  text-align: center;
+  color: #aaa;
+}
+
+.footer_ranking a {
+  color: #c4b2ff;
+  text-decoration: none;
+}
+
+.footer_ranking a:hover {
+  text-decoration: underline;
+}

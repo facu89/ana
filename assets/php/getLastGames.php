@@ -13,15 +13,20 @@ if (isset($_POST['lastWinner'])) {
         }
     }
     $playerWinnersID = Game::getIDLastWinners($players);
+    $date = $playerWinnersID->date ?? '';
+    $IDWinners = $playerWinnersID->IDwinners ?? [];
     $playerWinnersNames = [];
-    foreach ($playerWinnersID as $id) {
+    foreach ($IDWinners as $id) {
         foreach ($_SESSION as $key => $value) {
             if (is_array($value) && isset($value['id']) && $value['id'] === $id) {
                 $playerWinnersNames[] = $value['username'];
             }
         }
     }
-    echo json_encode($playerWinnersNames); 
+    $data = new stdClass();
+    $data->playerWinnersNames = $playerWinnersNames;
+    $data->date = $date;
+    echo json_encode($data); 
     exit;
 }
 

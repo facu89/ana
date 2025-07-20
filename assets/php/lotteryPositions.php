@@ -33,14 +33,16 @@ if(isset($_POST['btnPlayGames']) && isset($_POST['countPlayers']) && isset($_POS
     <p class="WelcomeText_2">Antes de jugar, deben sortarse las posiciones de los jugadores.</p>
     <p class="WelcomeText_3">Presione el botón para sortear las posiciones.</p>
     <div id="divDices"></div>
+    <div class="divButtons">
+        <button id="btnLotteryPositions" class="btn">Sortear posiciones</button>
+        <form action="lotteryPositions.php" method="post">
+            <input type="hidden" name="countPlayers" value="<?= htmlspecialchars($_GET['selectPlayers'] ?? 0) ?>">
+            <input type="hidden" name="selectSize" value="<?= htmlspecialchars($_GET['selectSize'] ?? 0) ?>">
+            <button id="btnPlayGame" class="btn" disabled="true" type="submit" name="btnPlayGames">Jugar</button>
 
-    <button id="btnLotteryPositions" class="btn">Sortear posiciones</button>
-    <form action="lotteryPositions.php" method="post">
-        <input type="hidden" name="countPlayers" value="<?= htmlspecialchars($_GET['selectPlayers'] ?? 0) ?>">
-        <input type="hidden" name="selectSize" value="<?= htmlspecialchars($_GET['selectSize'] ?? 0) ?>">
-        <button id="btnPlayGame" class="btn" disabled="true" type="submit" name="btnPlayGames">Jugar</button>
+        </form>
+    </div>
 
-    </form>
 
     <footer class="LotteryFooter">
     <p>Creado por Facundo Vidal · 

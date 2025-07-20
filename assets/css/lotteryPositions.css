@@ -11,12 +11,12 @@ body {
 }
 
 #statusText{
-    height: 40px;
+    height: 20px;
     width: 200px;
   text-align: center;
   font-weight: bold;
   font-size: 1.2rem;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 #divDices{
     margin: 30px;
@@ -27,7 +27,15 @@ body {
     width: 50px;
     height: 50px;
 }
-
+.divButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 600px;
+  height: 100px;
+}
 .dicePlayer{
     display:flex;
     flex-direction: column;
@@ -148,4 +156,35 @@ header {
     position: absolute;
     top:20px;
     right: 20px;
+}
+.turnCircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #996dab 60%, #b8a5ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2a2a3c;
+    margin-bottom: 6px;
+    box-shadow: 0 2px 8px rgba(123, 74, 226, 0.10);
+    border: 2px solid #7c5fc3;
+    margin-left: auto;
+    margin-right: auto;
+} 
+.playerPosition{
+    width: 70px;
+    height: 20px;
+}
+
+.diceImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    min-width: 60px;
+    position: relative;
 }

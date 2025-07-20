@@ -72,15 +72,14 @@ class Game {
         if ($countPlayers === 0) {
             return [];
         }
-        //para crear el arreglo que se va a usar en la consulta, contiene
-        //los id de los jugadores que participan en la partida
         $placeholders = implode(',', array_fill(0, $countPlayers, '?'));
 
         $pdo = new PDO('mysql:host=localhost;dbname=princess_ana_game', 'root', '');
 
         $sql = "
-            SELECT gw.id_user
+            SELECT gw.id_user, g.date_start
             FROM princess_ana_game.game_winners gw
+            JOIN princess_ana_game.games g ON gw.id_game = g.id_game
             WHERE gw.id_game = (
                 SELECT g.id_game
                 FROM princess_ana_game.games g
@@ -99,16 +98,52 @@ class Game {
         ";
 
         $stmt = $pdo->prepare($sql);
-        //le agrego la cantidad dejugadores para la consukta
         $params = array_merge($playerIds, [$countPlayers]);
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $IDwinners = [];
+        $date = null;
         foreach ($result as $row) {
             $IDwinners[] = $row['id_user'];
+            $date = $row['date_start'];
         }
-        return $IDwinners;
+        $data = new stdClass();
+        $data->date = $date;
+        $data->IDwinners = $IDwinners;
+        return $data;
+    }
+    public static function getRanking (){
+        $con = new mysqli("localhost", "root", "", "princess_ana_game");
+        if ($con->connect_errno) {
+            throw new RuntimeException("Error de conexión: " . $con->connect_error);
+        }
+         if ($con->connect_error) {
+            die("Conexión fallida: " . $con->connect_error);
+        }
+        $query = "SELECT u.user_name, u.id_user, COUNT(gw.id_user) AS games_won
+                                FROM princess_ana_game.users u
+                                LEFT JOIN princess_ana_game.game_winners gw ON u.id_user = gw.id_user
+                                GROUP BY u.id_user
+                                ORDER BY games_won DESC";
+        $resu = $con->query($query);
+        $ranking = [];
+         if($resu->num_rows > 0){
+            while($register = $resu->fetch_object()){
+                $ranking[] = [
+                    'username' => $register->user_name,
+                    'id_user' => $register->id_user,
+                    'games_won' => (int)$register->games_won
+                ];
+            }
+            return $ranking;
+           
+        }
+        else{
+            $con->close();
+            $resu->free();
+            return null;
+        }
     }
 }
 
