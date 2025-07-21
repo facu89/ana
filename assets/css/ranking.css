@@ -29,7 +29,6 @@ body {
   gap: 10px;
 }
 
-/* Primeros 5 jugadores */
 .rowRankin {
   background-color: #3a2f5a;
   color: #ffd700;
@@ -42,7 +41,6 @@ body {
   box-shadow: 0 0 5px #7c5fc3;
 }
 
-/* Resto del ranking */
 .rowRankinFive {
   background-color: #1e1e2f;
   padding: 8px 12px;
@@ -66,7 +64,6 @@ body {
   text-align: right;
 }
 
-/* Botón volver a jugar */
 .btn-playAgain {
   display: inline-block;
   margin: 10px;
@@ -83,7 +80,6 @@ body {
   background-color: #7a62a7;
 }
 
-/* Footer */
 .footer_ranking {
   margin-top: auto;
   padding: 20px;
@@ -101,4 +97,33 @@ body {
 
 .footer_ranking a:hover {
   text-decoration: underline;
+}
+.rowRankingHeader {
+  background-color: #1e1e2f;
+  border-bottom: 1px solid #7c5fc3;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #bca5ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 8px 8px 0 0;
+}
+
+.nameHeader {
+  flex: 1;
+  text-align: left;
+}
+
+.gamesHeader {
+  flex: 0 0 180px;
+  text-align: right;
+}
+
+.rowRankingHeader {
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }

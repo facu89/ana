@@ -10,6 +10,17 @@ document.addEventListener("DOMContentLoaded",  () => {
             if (peticion.readyState === 4 && peticion.status === 200) {
                 var ranking = JSON.parse(peticion.responseText);
                 var  content = document.getElementById("content");
+                var rowHeader = document.createElement('div');
+                var nameHeader = document.createElement('span');
+                var gamesWonHeader = document.createElement('span');
+                rowHeader.className = "rowRankingHeader";
+                nameHeader.className = "nameHeader";
+                gamesWonHeader.className = "gamesHeader";
+                nameHeader.textContent = 'Nombre';
+                gamesWonHeader.textContent = 'Juegos ganados';
+                rowHeader.appendChild(nameHeader);
+                rowHeader.appendChild(gamesWonHeader);
+                content.appendChild(rowHeader);
                 ranking.forEach(user => {
 
                     var row = document.createElement('div');

@@ -20,7 +20,9 @@ if(!isset($_SESSION['player1'])){
     <?php
     ?>
    <header>A jugar!
-
+<!-- este hidden lo uso para obtener la url y usarla para redireccionar al ranking y obtener los parametros originales por si el usuario selecciona
+ volver a jugar --> 
+  <input type="hidden" id="back" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
  <div class="logout-container">
             <a href="login.php?reset=1" class="btn btn-logout">Cerrar sesión</a>
 <a href="manual.php?back=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-logout">¿Cómo jugar?</a>   </header>

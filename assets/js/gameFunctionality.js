@@ -187,7 +187,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
             document.getElementById("result").textContent = "Todos han abandonado, no hay ganadores en la partida.";
         }
-        // Actualizar el estado del juego
+        //obtengo el url original de un hidden que lo gurada en la pagina
+        window.location.href = 'ranking.php?back=' + encodeURIComponent(document.getElementById('back').value);
+
         console.log("termino el juego");
         gameEnded = true;
         // Deshabilitar todos los botones de la tabla de juego
