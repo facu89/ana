@@ -1,7 +1,8 @@
 import Player from './Player.js';
 export default class Game{
-    constructor(players){
+    constructor(players,size){
         this.players = players;
+        this.size =size;
     }
     
     
@@ -19,6 +20,7 @@ export default class Game{
         this.players.forEach((player, i) => {
             param += "&Player" + i + "=" + encodeURIComponent(player.getId());
         });
+        param += "&size="+this.size;
         peticion.onreadystatechange = function() {  
             if (peticion.readyState === 4 && peticion.status === 200) {
                 console.log("New game added successfully");

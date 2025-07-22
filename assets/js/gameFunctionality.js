@@ -4,12 +4,13 @@ import Game from './game.js';
 document.addEventListener("DOMContentLoaded", async () => {
     const players = await chargerPlayers();
     //esto lo hago para que no se cargue hasta que no esten los jugadores
-    let play = new Game(players);
 
     var letter = 'A';
     const params = new URLSearchParams(window.location.search);
     const countPlayers = params.get("selectPlayers");
     const size = parseInt(params.get("selectSize"));
+    let play = new Game(players,size);
+
     var playerOfTurn;
     var gameEnded = false;
     const btnAbandonner = document.getElementById("btnEndGame");
@@ -188,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("result").textContent = "Todos han abandonado, no hay ganadores en la partida.";
         }
         //obtengo el url original de un hidden que lo gurada en la pagina
-        window.location.href = 'ranking.php?back=' + encodeURIComponent(document.getElementById('back').value);
+        window.location.href = 'ranking.php?selectSize='+size+'&selectPlayers='+countPlayers+'&back=1';
 
         console.log("termino el juego");
         gameEnded = true;

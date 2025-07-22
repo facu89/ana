@@ -63,19 +63,21 @@ body {
   text-decoration: underline;
 } 
 .btn-manual {
-    background: #6c63ff;
+      background: #2a2a3c;
     color: #fff;
-    border: 1px solid #6c63ff;
+    border: 1px solid #5f4b8b;
     border-radius: 8px;
     padding: 8px 18px;
     font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s, border 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(123, 74, 226, 0.10);
+    outline: none;
     text-decoration: none;
-    margin-left: 10px;
 }
 .btn-manual:hover {
-    background: #5548c8;
-    border: 1px solid #5548c8;
+   background: #5f4b8b;
+    color: #fff;
+    border: 1px solid #7a62a7;
 }

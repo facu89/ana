@@ -46,7 +46,7 @@ session_start();
             <option value="3">3</option>
             <option value="4">4</option>
             </select>
-            <button  class="btn" type="submit" name="btnPlay">Jugar</button>
+            <button  class="btn" type="submit" name="btnPlay">Siguiente</button>
         </form>
       </div>
     </div>

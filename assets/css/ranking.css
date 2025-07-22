@@ -23,7 +23,7 @@ body {
   background-color: #2a2a3c;
   border-radius: 10px;
   width: 90%;
-  max-width: 600px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -35,10 +35,11 @@ body {
   padding: 10px 15px;
   border-radius: 8px;
   display: flex;
-  justify-content: space-between;
   font-weight: bold;
   font-size: 1.1rem;
   box-shadow: 0 0 5px #7c5fc3;
+
+  align-items: center; 
 }
 
 .rowRankinFive {
@@ -46,38 +47,68 @@ body {
   padding: 8px 12px;
   border-radius: 6px;
   display: flex;
-  justify-content: space-between;
   font-size: 0.95rem;
   color: #f0f0f0;
   border: 1px solid #333;
+
+  align-items: center; 
 }
 
-.nameRanking,
-.nameRankingFive {
-  flex: 1;
+
+.nameRanking {
+  flex: 0 0 auto;
   text-align: left;
+  margin-right: 5px; 
 }
 
-.gamesRankin,
-.gamesRankinFive {
-  flex: 0 0 50px;
+.nameRankingFive {
+  flex: 0 0 auto; 
+  text-align: left;
+  margin-right: 5px;
+}
+
+.sizeRanking {
+  flex: 1; 
+  text-align: center;
+}
+
+.sizeRankingFive {
+  flex: 1; 
+  text-align: center;
+}
+
+.gamesRankin {
+  flex: 0 0 auto; 
   text-align: right;
+  margin-left: auto; 
+}
+
+.gamesRankinFive {
+  flex: 0 0 auto;
+  text-align: right;
+  margin-left: auto; 
 }
 
 .btn-playAgain {
-  display: inline-block;
-  margin: 10px;
-  padding: 8px 14px;
-  background-color: #5f4b8b;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+      background: #2a2a3c;
+    color: #fff;
+    border: 1px solid #5f4b8b;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(123, 74, 226, 0.10);
+    outline: none;
+    text-decoration: none;
 }
 
+
 .btn-playAgain:hover {
-  background-color: #7a62a7;
+      background: #5f4b8b;
+    color: #fff;
+    border: 1px solid #7a62a7;
 }
 
 .footer_ranking {
@@ -98,32 +129,70 @@ body {
 .footer_ranking a:hover {
   text-decoration: underline;
 }
+
 .rowRankingHeader {
   background-color: #1e1e2f;
   border-bottom: 1px solid #7c5fc3;
   padding: 10px 15px;
   display: flex;
-  justify-content: space-between;
   font-weight: bold;
   font-size: 1.1rem;
   color: #bca5ff;
   text-transform: uppercase;
   letter-spacing: 1px;
   border-radius: 8px 8px 0 0;
-}
-
-.nameHeader {
-  flex: 1;
-  text-align: left;
-}
-
-.gamesHeader {
-  flex: 0 0 180px;
-  text-align: right;
-}
-
-.rowRankingHeader {
   position: sticky;
   top: 0;
   z-index: 2;
+  
+  align-items: center;
+}
+
+.nameHeader {
+  flex: 0 0 auto; 
+  text-align: left;
+  margin-right: 40px; 
+}
+
+.sizeHeader {
+  flex: 1;
+  text-align: center;
+}
+
+.gamesHeader {
+  flex: 0 0 auto;
+  text-align: right;
+  margin-left: auto; 
+}
+
+.medal {
+  
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-right: 5px;
+}
+
+.gold {
+  color: gold;
+  text-shadow: 0 0 5px #ffde59;
+}
+
+.silver {
+  color: silver;
+  text-shadow: 0 0 5px #c0c0c0;
+}
+
+.bronze {
+  color: #cd7f32;
+  text-shadow: 0 0 5px #b87333;
+}
+
+.rowRankin,
+.rowRankinFive {
+  gap: 0; 
+}
+
+.rowRankingHeader {
+  gap: 0; 
 }

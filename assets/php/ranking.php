@@ -11,7 +11,7 @@
     <header class="header_ranking">Ranking de mejores jugadores
         <?php if (isset($_GET['back'])): ?>
     <div style="text-align:right; margin-bottom:15px;">
-        <a href="<?= htmlspecialchars($_GET['back']) ?>" class="btn btn-playAgain">Jugar de nuevo</a>
+        <a href="game.php?selectPlayers=<?= htmlspecialchars($_GET['selectPlayers']) ?>&selectSize=<?= htmlspecialchars($_GET['selectSize']) ?>" class="btn btn-playAgain">Jugar de nuevo</a>
     </div>
 <?php endif; ?>
     </header>

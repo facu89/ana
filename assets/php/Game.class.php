@@ -1,27 +1,8 @@
 <?php 
 
 class Game {
-    private $players;
-    private $size;
-    private $status;
-    public function __construct( $players, $size, $status) {
-        $this->players = $players;
-        $this->size = $size;
-        $this->status = $status;        
-    }
-
-    public function getStatus() {
-        return $this->status;
-    }
-
-    public function getPlayers() {
-        return $this->players;
-    }
-
-    public function getSize() {
-        return $this->size;
-    }
- public static function createGame($players, $winners, $date) {
+   
+ public static function createGame($players, $winners, $date,$size) {
         $con = new mysqli("localhost", "root", "", "princess_ana_game");
 
         if ($con->connect_error) {
@@ -29,8 +10,8 @@ class Game {
         }
 
         // unjuego nuevo
-        $stmt = $con->prepare("INSERT INTO games (date_start) VALUES (?)");
-        $stmt->bind_param("s", $date);
+        $stmt = $con->prepare("INSERT INTO games (date_start,size) VALUES (?,?)");
+        $stmt->bind_param("si", $date,$size);
 
         if (!$stmt->execute()) {
             die("Error al insertar juego: " . $stmt->error);
@@ -113,22 +94,31 @@ class Game {
         $data->IDwinners = $IDwinners;
         return $data;
     }
-    public static function getRanking (){
+    public static function getRanking ($size){
         $con = new mysqli("localhost", "root", "", "princess_ana_game");
         if ($con->connect_errno) {
             throw new RuntimeException("Error de conexión: " . $con->connect_error);
         }
-         if ($con->connect_error) {
+        if ($con->connect_error) {
             die("Conexión fallida: " . $con->connect_error);
         }
         $query = "SELECT u.user_name, u.id_user, COUNT(gw.id_user) AS games_won
-                                FROM princess_ana_game.users u
-                                LEFT JOIN princess_ana_game.game_winners gw ON u.id_user = gw.id_user
-                                GROUP BY u.id_user
-                                ORDER BY games_won DESC";
-        $resu = $con->query($query);
+                FROM princess_ana_game.users u
+                LEFT JOIN (
+                    SELECT gw.id_user, gw.id_game
+                    FROM princess_ana_game.game_winners gw
+                    JOIN princess_ana_game.games g ON gw.id_game = g.id_game
+                    WHERE g.size = ?
+                ) AS gw ON u.id_user = gw.id_user
+                GROUP BY u.id_user
+                ORDER BY games_won DESC;
+";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("i", $size);
+        $stmt->execute();
+        $resu = $stmt->get_result();
         $ranking = [];
-         if($resu->num_rows > 0){
+        if($resu->num_rows > 0){
             while($register = $resu->fetch_object()){
                 $ranking[] = [
                     'username' => $register->user_name,
@@ -136,12 +126,12 @@ class Game {
                     'games_won' => (int)$register->games_won
                 ];
             }
-            return $ranking;
-           
-        }
-        else{
+            $stmt->close();
             $con->close();
-            $resu->free();
+            return $ranking;
+        } else {
+            $stmt->close();
+            $con->close();
             return null;
         }
     }

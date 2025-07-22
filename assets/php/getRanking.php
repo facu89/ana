@@ -1,7 +1,8 @@
 <?php 
 require_once('Game.class.php');
 header('Content-Type: application/json');
-$ranking = Game::getRanking();
+$size = $_GET['selectSize'];
+$ranking = Game::getRanking($size);
 $rankingUsers = [];
 foreach($ranking as $user){
     $userObj = new stdClass();

@@ -21,8 +21,6 @@
         <p class="text_manual">Una vez dentro, puedes seleccionar la cantidad de jugadores y el tamaño del tablero.</p>
         <h3 class="title_manual">SORTEO DE TURNOS:</h3>
         <p class="text_manual">Después de eso, se sortearán las posiciones de los jugadores y podrás comenzar a jugar.</p>
-        <p class="text_manual">Las posiciones se sortean lanzando dados. Quien saque el numero mas alto, tiene el primer turno, y asi consecutivamente hasta completar las posiciones totales.</p>
-        <p class="text_manual">En caso de empate entre jugadores, se volveran a sortear los turnos de aquellos jugadores que hayan empatado.</p>
         <h3 class="title_manual">JUEGO:</h3>
         <p class="text_manual">El juego consiste en formar la mayor cantidad de plabras ANA posibles.</p>
         <p class="text_manual">Las palabras pueden formarse en vertical, horizntal, o diagonal.</p>
