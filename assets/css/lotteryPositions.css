@@ -106,6 +106,19 @@ header {
 .btn:hover {
   background-color: #7a62a7;
 }
+.disabledBtn {
+  padding: 10px 20px;
+  background-color: #3b2f547e;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
 
 .LotteryFooter {
   margin-top: auto;

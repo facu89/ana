@@ -28,23 +28,24 @@ if(!isset($_SESSION['player1'])){
 <a href="manual.php?back=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-logout">¿Cómo jugar?</a>   </header>
 
 <div id="mainContainer">
-  <div id="divGameTable"></div>  
+  <div id="gameSection">
+    <div id="divGameTable"></div>  
 
-  <div id="sidePanel">
-    <div class="divChangeLetter">
-   <button id="btnChangeLetter">Cambiar letra</button>
-      <div id="textSelectedLetter"></div>
-    </div>
-   
-
-
-  </div>
-      <div id="textResults"></div>
-      <div id="divAbandonButtonResult">
-        <button id="btnEndGame">Abandonar todos</button>
-        <div id="result"></div>
+    <div id="sidePanel">
+      <div class="divChangeLetter">
+        <button id="btnChangeLetter">Cambiar letra</button>
+        <div id="textSelectedLetter"></div>
       </div>
+    </div>
+
+    <div id="textResults"></div>
+
+    <div id="divAbandonButtonResult">
+      <button id="btnEndGame">Abandonar todos</button>
+      <div id="result"></div>
+    </div>
   </div>
+</div>
 
 <footer>
   <p>Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  

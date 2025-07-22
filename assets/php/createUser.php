@@ -20,6 +20,16 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
     if (! $day || $day->format('Y-m-d') !== $birthdate) {
         $errors[] = 'Fecha de nacimiento inválida.';
     }
+    
+    // Validar que el usuario tenga al menos 10 años
+    if ($day) {
+        $today = new DateTime();
+        $age = $today->diff($day)->y;
+        if ($age < 10) {
+            $errors[] = 'Debes tener al menos 10 años para registrarte.';
+        }
+    }
+    
     $passwordHashed = $_POST['passwordHashed'];
     // Validar la contraseña original (no el hash)
     $originalPass = $_POST['password'] ?? '';

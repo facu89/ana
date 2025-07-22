@@ -188,9 +188,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
             document.getElementById("result").textContent = "Todos han abandonado, no hay ganadores en la partida.";
         }
-        //obtengo el url original de un hidden que lo gurada en la pagina
-        window.location.href = 'ranking.php?selectSize='+size+'&selectPlayers='+countPlayers+'&back=1';
-
+        
         console.log("termino el juego");
         gameEnded = true;
         // Deshabilitar todos los botones de la tabla de juego
@@ -198,6 +196,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         boxButtons.forEach(button => {
             button.disabled = true;
         });
+        setTimeout(() => {
+        window.location.href = 'ranking.php?selectSize='+size+'&selectPlayers='+countPlayers+'&back=1';
+}, 2000);
+        //obtengo el url original de un hidden que lo gurada en la pagina
+
     }
     function getFirstPlayer() {
         var firstPlayer;
@@ -254,13 +257,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                     if (gameEnded) return;
                     button.disabled = true;
                     player.abandon();
+                    playerOfTurn = getNextPlayer();
+
                     uploadResultsDOM();
                     var playersInGame = players.filter(p => p.getInGame());
                     if(playersInGame.length<2){
                         endGame();
 
                     }
-
                     console.log(playersInGame.length);
                 });
                 divContainer.className = 'divPlayerButton';

@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const turns = [];
 
     function uploadDOM(){
+        document.getElementById('btnPlayGame').className = 'disabledBtn';
         var divDices = document.getElementById("divDices");
         divDices.innerHTML = ""; 
         for (let i = 0; i < players.length; i++) {
@@ -39,17 +40,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const btnLottery = document.getElementById("btnLotteryPositions");
     btnLottery.addEventListener("click",function(){
         lotteryDices();
-        document.getElementById("btnPlayGame").disabled = false;
+      
+
     });
 
     function lotteryDices() {
-        var diceImages = document.querySelectorAll(".diceImage");
+   
+                statusText.textContent = "Sorteando turnos...";
+
+        setTimeout(() => {
+                 var diceImages = document.querySelectorAll(".diceImage");
         diceImages.forEach(diceImage => {
             diceImage.innerHTML = '';
         });
         turns.length = 0;
-        statusText.textContent = "Sorteando turnos...";
-
         let uniqueNumbers = [];
         for (let i = 1; i <= diceImages.length; i++) uniqueNumbers.push(i);
         uniqueNumbers.sort(() => Math.random() - 0.5);
@@ -81,6 +85,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         statusText.textContent = "¡Turnos sorteados!";
         chargerTurn();
+          document.getElementById("btnPlayGame").disabled = false;
+        document.getElementById('btnPlayGame').className = 'btn';
+        }, 3000);
+
     }
 
     function chargerResults() {

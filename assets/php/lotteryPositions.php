@@ -38,7 +38,7 @@ if(isset($_POST['btnPlayGames']) && isset($_POST['countPlayers']) && isset($_POS
         <form action="lotteryPositions.php" method="post">
             <input type="hidden" name="countPlayers" value="<?= htmlspecialchars($_GET['selectPlayers'] ?? 0) ?>">
             <input type="hidden" name="selectSize" value="<?= htmlspecialchars($_GET['selectSize'] ?? 0) ?>">
-            <button id="btnPlayGame" class="btn" disabled="true" type="submit" name="btnPlayGames">Jugar</button>
+            <button id="btnPlayGame"  disabled="true" type="submit" name="btnPlayGames">Jugar</button>
 
         </form>
     </div>
