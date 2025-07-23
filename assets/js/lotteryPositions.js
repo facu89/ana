@@ -140,8 +140,23 @@ document.addEventListener("DOMContentLoaded", async () => {
                         div.appendChild(p2);
                     }
                 } else {
-                    p.textContent = 'No hubo ganadores en la última partida.';
-                    div.appendChild(p);
+                     var secondPeticion = new XMLHttpRequest();
+                        secondPeticion.open("POST", "../php/getLastGames.php", true);
+                        secondPeticion.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        var param = "lastGames=true";
+                        secondPeticion.onreadystatechange = function() {
+                         if (secondPeticion.readyState === 4 && secondPeticion.status === 200) {
+                            var playersGames = JSON.parse(secondPeticion.responseText); 
+                            p.textContent = 'Partidas ganadas:';
+                            div.appendChild(p);
+                            playersGames.forEach(player => {
+                                p = document.createElement('p');
+                                p.textContent = player.username + ": " + player.gamesWon;
+                                div.appendChild(p);
+                            });
+                        }
+                        }
+                        secondPeticion.send(param)
                 }
             }
         };

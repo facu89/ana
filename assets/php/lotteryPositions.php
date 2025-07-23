@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['player1'])){
         header("Location: login.php");
@@ -46,8 +47,8 @@ if(isset($_POST['btnPlayGames']) && isset($_POST['countPlayers']) && isset($_POS
 
     <footer class="LotteryFooter">
     <p>Creado por Facundo Vidal · 
-      <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  
-      <div>facundovidal492@gmail.com</div>
+            Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> · facundovidal492@gmail.com
+
     </p>
   </footer>
 </body>

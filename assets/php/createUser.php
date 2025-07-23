@@ -145,8 +145,8 @@ if (isset($_POST['username']) &&  isset($_POST['email']) && isset($_POST['birthd
 </div>
       <footer class="lobbyFooter">
     <p>Creado por Facundo Vidal · 
-      <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  
-      <div>facundovidal492@gmail.com</div>
+            Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> · facundovidal492@gmail.com
+
     </p>
 
   </footer>

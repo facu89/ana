@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
   if(!isset($_SESSION['player1'])){
         header("Location: login.php");
@@ -16,6 +17,11 @@ session_start();
 </head>
 <body class="lobby">
   <?php
+    if (isset($_GET['changeTable']) &&  isset($_GET['btnPlay'])) {
+     
+      header("Location: game.php?selectPlayers=" . urlencode($_GET['selectPlayers']) . "&selectSize=" . urlencode($_GET['selectSize']));
+      exit;
+    }
     if (isset($_GET['btnPlay'])){
       $countPlayers = (int)$_GET['selectPlayers'];
       $_SESSION['countPlayers'] = $countPlayers;
@@ -40,13 +46,32 @@ session_start();
             <option value="6">6 × 6</option>
             <option value="10">10 × 10</option>
             </select>
+            <?php
+            if(!isset($_GET['changeTable'])) {
+                          ?>
             <p class="cardText">Selecciona la cantidad de jugadores</p>
             <select id="selectPlayers" class="select" name="selectPlayers">
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             </select>
+          
+
+            <?php 
+            }
+            if(!isset($_GET['changeTable'])){
+            ?>
             <button  class="btn" type="submit" name="btnPlay">Siguiente</button>
+            <?php 
+            } else{
+            ?>
+              <input type="hidden" name="selectPlayers" value="<?php echo htmlspecialchars($_GET['selectPlayers'] ?? '');; ?>">
+             <input type="hidden" name="changeTable" value="1">
+            <button class="btn" type="submit" name="btnPlay">Cambiar tablero</button>
+            <?php
+            }
+            ?>
+
         </form>
       </div>
     </div>
@@ -54,8 +79,8 @@ session_start();
 
   <footer class="lobbyFooter">
     <p>Creado por Facundo Vidal · 
-      <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  
-      <div>facundovidal492@gmail.com</div>
+            Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> · facundovidal492@gmail.com
+
     </p>
 
   </footer>

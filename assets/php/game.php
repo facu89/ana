@@ -22,8 +22,11 @@ if(!isset($_SESSION['player1'])){
    <header>A jugar!
 <!-- este hidden lo uso para obtener la url y usarla para redireccionar al ranking y obtener los parametros originales por si el usuario selecciona
  volver a jugar --> 
+ 
   <input type="hidden" id="back" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>">
  <div class="logout-container">
+              <a href="lobby.php?changeTable=1&selectPlayers=<?php echo htmlspecialchars($_GET['selectPlayers'] ?? ''); ?>" class="btn btn-logout">Cambiar tablero</a>
+
             <a href="login.php?reset=1" class="btn btn-logout">Cerrar sesión</a>
 <a href="manual.php?back=<?= urlencode($_SERVER['REQUEST_URI']) ?>" class="btn btn-logout">¿Cómo jugar?</a>   </header>
 
@@ -48,8 +51,8 @@ if(!isset($_SESSION['player1'])){
 </div>
 
 <footer>
-  <p>Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  
-  <a href="mailto:facundovidal492@gmail.com">Email</a></p>
+  <p>      Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> · facundovidal492@gmail.com
+</p>
 </footer>
 
 </body>

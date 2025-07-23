@@ -1,17 +1,20 @@
 <?php
+
 require_once __DIR__ . '/User.class.php';
 //esto es para que si el usuario volvio para atras, se desruya la session
 //para forzarlo a loguear session nuevamente, y que no ocurran errores
-      session_start();
+
+// Evitar que el navegador cachee esta página
+
+session_start();
 
 
-if((isset($_SESSION['player1']) && !isset($_GET['loginPlayer']))  && !isset($_POST['selectPlayers'])  ) {
-
+if(isset($_SESSION['player1']) && (!isset($_GET['loginPlayer']) ) && !isset($_POST['selectPlayers'])) {
+   echo 'Detectado: reseteando sesión...<br>';
     session_unset();
     session_destroy();
     header("Location: login.php");
     exit;
-
 }
 //por si el usuario decidio cerrar la sesion, se resetea.
 if (isset($_GET['reset'])) {
@@ -145,9 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <footer class="lobbyFooter">
     <p>
-      Creado por Facundo Vidal ·
-      <a href="https://github.com/facu89" target="_blank">GitHub</a> ·
-      facundovidal492@gmail.com
+      Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> · facundovidal492@gmail.com
     </p>
   </footer>
 </body>

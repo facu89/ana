@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['player1'])){
+        header("Location: login.php");
+        exit;
+} ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,8 +28,8 @@
             
     </div>
     <footer class="footer_ranking">
-         <p>Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> ·  
-  <a href="mailto:facundovidal492@gmail.com">Email</a></p>
+         <p>      Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> · facundovidal492@gmail.com
+</p>
     </footer>
 </body>
 </html>
