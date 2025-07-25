@@ -78,7 +78,8 @@ session_start();
   </div>
 
   <footer class="lobbyFooter">
-    <p>Creado por Facundo Vidal · 
+    <p>
+      
             Creado por Facundo Vidal · <a href="https://github.com/facu89" target="_blank">GitHub</a> · facundovidal492@gmail.com
 
     </p>

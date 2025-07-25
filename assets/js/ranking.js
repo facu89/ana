@@ -54,12 +54,15 @@ document.addEventListener("DOMContentLoaded", () => {
             medal.textContent = "";
             medal.className = "medal"; 
           }
-
-          if (count > 5) {
-            row.className = "rowRankinFive";
+          if (count < 5 && user.gameswon !=0
+) {
+          row.className = "rowRankinFive";
             name.className = "nameRankingFive";
             gamesWon.className = "gamesRankinFive";
             sizeRow.className = "sizeRankingFive";
+
+       
+
           } else {
             row.className = "rowRankin";
             name.className = "nameRanking";

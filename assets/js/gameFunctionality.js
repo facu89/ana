@@ -147,7 +147,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         //  Limpio cualquier resaltado previo
         buttons.forEach(btn => btn.classList.remove("highlight"));
-        // Aplico la clase a cada botón de cada ocurrencia
         occurrences.forEach(triple => {
             triple.forEach(btn => btn.classList.add("highlight"));
         });
@@ -181,7 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     textResult += player.getName() + ', ';
                 });
                 textResult = textResult.slice(0, -2);
-                document.getElementById("result").textContent = textResult + " han ganado la partida.";
+                document.getElementById("result").textContent = textResult + "empatan con la mayoria de puntos, hambos suman un punto. ";
             } else {
                 document.getElementById("result").textContent = "El jugador " + playersWinners[0].getName() + " ha ganado la partida.";
             }

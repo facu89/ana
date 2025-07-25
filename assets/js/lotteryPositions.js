@@ -75,7 +75,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 posDiv.className = 'playerPosition';
                 dicePlayerDiv.insertBefore(posDiv, dicePlayerDiv.firstChild);
             }
-            posDiv.textContent = "Puesto: " + uniqueNumbers[j];
 
             turns[j] = {
                 playerIndex: j,
@@ -147,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         secondPeticion.onreadystatechange = function() {
                          if (secondPeticion.readyState === 4 && secondPeticion.status === 200) {
                             var playersGames = JSON.parse(secondPeticion.responseText); 
-                            p.textContent = 'Partidas ganadas:';
+                            p.textContent = 'Partidas ganadas por cada jugador:';
                             div.appendChild(p);
                             playersGames.forEach(player => {
                                 p = document.createElement('p');

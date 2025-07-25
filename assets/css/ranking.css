@@ -29,7 +29,7 @@ body {
   gap: 10px;
 }
 
-.rowRankin {
+.rowRankinFive {
   background-color: #3a2f5a;
   color: #ffd700;
   padding: 10px 15px;
@@ -42,7 +42,7 @@ body {
   align-items: center; 
 }
 
-.rowRankinFive {
+.rowRankin {
   background-color: #1e1e2f;
   padding: 8px 12px;
   border-radius: 6px;
@@ -55,21 +55,16 @@ body {
 }
 
 
-.nameRanking {
+.nameRankingFive {
   flex: 0 0 auto;
   text-align: left;
   margin-right: 5px; 
 }
 
-.nameRankingFive {
+.nameRanking {
   flex: 0 0 auto; 
   text-align: left;
   margin-right: 5px;
-}
-
-.sizeRanking {
-  flex: 1; 
-  text-align: center;
 }
 
 .sizeRankingFive {
@@ -77,13 +72,18 @@ body {
   text-align: center;
 }
 
-.gamesRankin {
+.sizeRanking {
+  flex: 1; 
+  text-align: center;
+}
+
+.gamesRankinFive {
   flex: 0 0 auto; 
   text-align: right;
   margin-left: auto; 
 }
 
-.gamesRankinFive {
+.gamesRankin {
   flex: 0 0 auto;
   text-align: right;
   margin-left: auto; 
